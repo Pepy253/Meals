@@ -52,21 +52,21 @@ class QueryHelper
             ->when(request('category') != 'null'
                 && request('category') != null
                 && request('category') != '!null', function ($query) {
-                        return $query->where('category_id', '=', request('category'));
+                    return $query->where('category_id', '=', request('category'));
                 })
             ->when(request('category') === '!null', function ($query) {
                 return $query->whereNotNull('category_id');
             })
             ->when(count(explode(',', request('tags'))) > 1, function ($query) {
                 return $query->join('meal_tags as mt', 'meal_id', '=', 'id')
-                                ->whereIn('mt.tag_id', explode(',', request('tags')))
-                                ->havingRaw("COUNT('tag.tag_id') = " . count(explode(',', request('tags'))))
-                                ->groupBy('id', 'category_id', 'deleted_at', 'updated_at', 'created_at');
+                ->whereIn('mt.tag_id', explode(',', request('tags')))
+                ->havingRaw("COUNT('tag.tag_id') = " . count(explode(',', request('tags'))))
+                ->groupBy('id', 'category_id', 'deleted_at', 'updated_at', 'created_at');
             })
             ->when(count(explode(',', request('tags'))) == 1
                 && request('tags') != null, function ($query) {
                     return  $query->join('meal_tags as mt', 'meal_id', '=', 'id')
-                                    ->where('mt.tag_id', request('tags'));
+                    ->where('mt.tag_id', request('tags'));
                 })
             ->when(request('diff_time') > 0, function ($query) {
                 return $query->withTrashed();
