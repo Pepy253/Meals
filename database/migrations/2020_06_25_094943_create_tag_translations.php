@@ -23,9 +23,7 @@ class CreateTagTranslations extends Migration
             $table->primary(['tag_id', 'language_id']);
             $table->unique(['tag_id','language_id']);
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-        
-            
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');   
         });
     }
 

@@ -23,9 +23,7 @@ class CreateIngredientTranslations extends Migration
             $table->primary(['ingredient_id', 'language_id']);
             $table->unique(['ingredient_id','language_id']);
             $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-
-            
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');    
         });
     }
 

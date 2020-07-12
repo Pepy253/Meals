@@ -13,21 +13,16 @@ class LanguageSeeder extends Seeder
     public function run()
     {
         $languages = array('French', 'German', 'English');
-
         $faker = Faker::create('App\Language');
         
-        for($i = 0; $i < count($languages); $i++)
-        {
+        for ($i = 0; $i < count($languages); $i++) {
             $letter = str_split($languages[$i]);
             
-            if($languages[$i] == 'German')
-                {
-                    $slug = 'de';
-                }
-            else
-                {
-                    $slug = strtolower($letter[0]) . $letter[1]; 
-                }        
+            if ($languages[$i] == 'German') {
+                $slug = 'de';
+            } else {
+                $slug = strtolower($letter[0]) . $letter[1];
+            }
                                                          
             DB::table('languages')->insert([
                 'title' => $languages[$i],

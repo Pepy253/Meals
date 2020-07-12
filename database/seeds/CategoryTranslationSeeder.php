@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Category;
 
-
 class CategoryTranslationSeeder extends Seeder
 {
     /**
@@ -22,13 +21,11 @@ class CategoryTranslationSeeder extends Seeder
             array('Sauce', 'Soße', 'Sauce'),
             array('Salade', 'Salat', 'Salad'),
             array('Plat principal', 'Hauptkurs', 'Main course'),
-            array('Dessert', 'Dessert', 'Dessert'),      
+            array('Dessert', 'Dessert', 'Dessert'),
         );
 
-        for($i = 0; $i < count($category); $i++)
-        {
-            for($j = 0; $j < count($languages); $j++)
-            {
+        for ($i = 0; $i < count($category); $i++) {
+            for ($j = 0; $j < count($languages); $j++) {
                 DB::table('category_translations')->insert([
                     'category_id' => $category[$i]->id,
                     'language_id' => $languages[$j]->id,

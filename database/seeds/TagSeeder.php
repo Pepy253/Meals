@@ -15,12 +15,10 @@ class TagSeeder extends Seeder
     public function run()
     {
         $faker = Faker::Create('App\Tag');
-
         $langId = Language::where('slug', '=', 'en')->get();
         $tags = array('Fruity', 'Sweet', 'Sour', 'Spicy');
 
-        foreach($tags as $tag)
-        {
+        foreach ($tags as $tag) {
             $data = [
                 'slug' => Str::slug($tag, '_'),
                 'created_at' => $faker->dateTimeThisDecade($max = '-1 years', $timezone = null),
@@ -30,6 +28,7 @@ class TagSeeder extends Seeder
                     'title' => $tag
                 ]
             ];
+
             Tag::create($data);
         }
     }

@@ -20,13 +20,11 @@ class MealTranslationSeeder extends Seeder
         $meals = Meal::withTrashed()->get();
         $langId = Language::where('slug', '!=', 'en')->get();
         
-        foreach($meals as $meal)
-        {
+        foreach ($meals as $meal) {
             $desc = $meal->translate('en')->description;
             $title = $meal->translate('en')->title;
 
-            foreach($langId as $lang)
-            {
+            foreach ($langId as $lang) {
                 DB::table('meal_translations')->insert([
                     'meal_id' => $meal->id,
                     'language_id' => $lang->id,

@@ -74,9 +74,6 @@
                 </div>
                 <p>Check out greatest meals the world has to offer.</p>
 
-                <div class="links">
-                    <a href="{{ action('FilterController@getFilters') }}">Meal list</a>
-                </div>
             </div>           
         </div>
     </body>

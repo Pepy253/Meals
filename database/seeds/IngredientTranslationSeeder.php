@@ -19,15 +19,15 @@ class IngredientTranslationSeeder extends Seeder
         $languages = DB::table('languages')->where('slug', '!=', 'en')->get();
 
 
-        foreach($ingredients as $ingredient)
-        {
-            foreach($languages as $language)
-            {
+        foreach ($ingredients as $ingredient) {
+            foreach ($languages as $language) {
+                $title = ucfirst(str_replace('_', ' ', $ingredient->slug));
+
                 DB::table('ingredient_translations')->insert([
                     'ingredient_id' => $ingredient->id,
                     'language_id' => $language->id,
                     'locale' => $language->slug,
-                    'title' => GoogleTranslate::trans(ucfirst(str_replace('_', ' ', $ingredient->slug)), $language->slug)
+                    'title' => GoogleTranslate::trans($title, $language->slug)
                 ]);
             }
         }

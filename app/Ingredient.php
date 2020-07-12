@@ -18,5 +18,4 @@ class Ingredient extends Model implements TranslatableContract
     {
         return $this->belongsToMany(Meal::class, 'meal_ingredients');
     }
-
 }

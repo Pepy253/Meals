@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
 class MealTagSeeder extends Seeder
 {
     /**
@@ -16,21 +15,16 @@ class MealTagSeeder extends Seeder
         $tags = DB::table('tags')->get();
         $meals = DB::table('meals')->get();
 
-        foreach($meals as $meal)
-        {
-            foreach($tags as $tag)
-            {
+        foreach ($meals as $meal) {
+            foreach ($tags as $tag) {
                 $rnd = rand(0, 100);
 
-                if($rnd < 70)
-                {
+                if ($rnd < 70) {
                     DB::table('meal_tags')->insert([
                         'meal_id' => $meal->id,
                         'tag_id' => $tag->id
                     ]);
-                }
-                else
-                {
+                } else {
                     continue;
                 }
             }

@@ -17,39 +17,30 @@ class MealSeeder extends Seeder
     {
         $faker = Faker::create('App\Meal');
         $faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($faker));
-
         $categories = DB::table('categories')->get();
         $langId = Language::where('slug', '=', 'en')->get();
         
-        for($i = 0; $i < 35; $i++)
-        {
+        for ($i = 0; $i < 35; $i++) {
             $name[] = $faker->foodName();
         }
 
         $food = array_unique($name);
 
-        foreach($food as $f)
-        {
+        foreach ($food as $f) {
             $rnd = rand(0, 100);
 
-            if($rnd < 80)
-            {
+            if ($rnd < 80) {
                 $deleted = null;
-            }
-            else
-            {
+            } else {
                 $deleted = $faker->dateTimeThisMonth($max = 'now', $timezone = null);
             }
 
-            if($rnd < 50)
-            {
+            if ($rnd < 50) {
                 $updated = $faker->dateTimeThisYear($max = '-1 months', $timezone = null);
                 $catId = rand($categories[0]->id, $categories[(count($categories)-1)]->id);
-            }
-            else
-            {
+            } else {
                 $updated = null;
-                $catId = null;    
+                $catId = null;
             }
 
             $data = [
@@ -63,8 +54,8 @@ class MealSeeder extends Seeder
                         'description' => $faker->realText($maxNbChars = 50, $indexSize = 2),
                         'title' => $f
                     ]
+                ];
                 
-            ];
             Meal::create($data);
         }
     }

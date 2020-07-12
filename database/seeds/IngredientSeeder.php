@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\DB;
 use App\Ingredient;
 use App\Language;
 
-
-
 class IngredientSeeder extends Seeder
 {
     /**
@@ -21,15 +19,13 @@ class IngredientSeeder extends Seeder
         $langId = Language::where('slug', '=', 'en')->get();
         $faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($faker));
 
-        for($i = 0; $i < 10; $i++)
-        {
-        $name[] = $faker->vegetableName();
+        for ($i = 0; $i < 10; $i++) {
+            $name[] = $faker->vegetableName();
         }
 
         $ingredients = array_unique($name);
 
-        foreach($ingredients as $ingredient)
-        {
+        foreach ($ingredients as $ingredient) {
             $data = [
                 'slug' => Str::slug($ingredient, '_'),
                 'created_at' => $faker->dateTimeThisDecade($max = '-1 years', $timezone = null),
